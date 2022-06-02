@@ -47,6 +47,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </svg>
             <span class="fs-4"><?= $this->fetch('title') ?></span>
         </header>
+    </div>
         <main>
            <div class="row">
                 <?= $this->Flash->render() ?>
@@ -57,6 +58,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <footer class="pt-5 my-5 text-muted border-top">
             One Project a Day - with CakePHP
          </footer>
-    </div>
+   
 </body>
 </html>
