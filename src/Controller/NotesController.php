@@ -19,8 +19,18 @@ class NotesController extends AppController
      */
     public function index()
     {
-        $notes = $this->paginate($this->Notes);
+        if ($this->request->is(['post', 'put'])){
+            $id = $this->request->getData('id');
+            $note = $this->getNoteEntity($id);
+            if ($this->Notes->save($note)){
+                $this->Flash->success(__('The note has been saved.'));
 
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The note could not be saved. Please, try again,'));
+        }
+
+        $notes = $this->paginate($this->Notes);
         $this->set(compact('notes'));
     }
 
@@ -103,4 +113,21 @@ class NotesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    protected function getNoteEntity($id): \App\Model\Entity\Note
+    {
+    if ($id !== null) {
+        $note = $this->Notes->get($id);
+
+        return $this->Notes->patchEntity(
+            $note,
+            $this->request->getData()
+        );
+    }
+
+    return $this->Notes->newEntity(
+        $this->request->getData()
+    );
+    }
 }
+

@@ -43,6 +43,13 @@ class AppView extends View
             'prevDisabled' => '<li class="prev disabled"><a class="btn btn-outline-secondary m-1" disabled href="" onclick="return false;">{{text}}</a></li>',
             ]
         ]);
+
+        $this->loadHelper('Form', [
+            'templates' => [
+                'inputContainer' => '<div class="input {{type}}{{required}} mb-3">{{content}}</div>',
+                'inputContainerError' => '<div class="input {{type}}{{required}} error mb-3">{{content}}{{error}}</div>',
+            ],
+        ]);
     }
 }
 
